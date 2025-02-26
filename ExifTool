@@ -1,0 +1,2 @@
+# Obtain the shoot info for a mp4 file
+ExifTool NAME.mp4 > NAME.exif.txt
