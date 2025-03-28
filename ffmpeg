@@ -1,3 +1,12 @@
 # extract single frame using ffmpeg
-
 ffmpeg -i [INPUT].MP4 -r 30 -vf select='eq(n\,[FRAME_COUNT])' -vframes 1 [output]_%d.bmp
+
+------ this is taken from https://creatomate.com/blog/how-to-extract-images-from-a-video-using-ffmpeg
+#How to extract images
+#Use the following command to extract frames from a video. This extracts all frames using the pattern frame0001.png, frame0002.png, and so on.
+ffmpeg -i input.mp4 frame%04d.png
+
+#Extract at a different frame rate
+#By default, FFmpeg extracts all frames from the video. So if your input video is 5 seconds long with a frame rate of 60 fps, it will extract 5 x 60 = 300 images. If that's too much, we can instruct FFmpeg to extract frames at a slower frame rate.
+ffmpeg -i input.mp4 -r 10 frame%04d.png
+#The -r 10 argument instructs FFmpeg to extract at a frame rate of 10 fps.
