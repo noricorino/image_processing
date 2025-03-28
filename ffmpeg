@@ -2,32 +2,32 @@
 ffmpeg -i [INPUT].MP4 -r 30 -vf select='eq(n\,[FRAME_COUNT])' -vframes 1 [output]_%d.bmp
 
 ------ this is taken from https://creatomate.com/blog/how-to-extract-images-from-a-video-using-ffmpeg
-##How to extract images
-#Use the following command to extract frames from a video. This extracts all frames using the pattern frame0001.png, frame0002.png, and so on.
+## How to extract images
+# Use the following command to extract frames from a video. This extracts all frames using the pattern frame0001.png, frame0002.png, and so on.
      ffmpeg -i input.mp4 frame%04d.png
 
-##Extract at a different frame rate
-#By default, FFmpeg extracts all frames from the video. So if your input video is 5 seconds long with a frame rate of 60 fps, it will extract 5 x 60 = 300 images. If that's too much, we can instruct FFmpeg to extract frames at a slower frame rate.
+## Extract at a different frame rate
+# By default, FFmpeg extracts all frames from the video. So if your input video is 5 seconds long with a frame rate of 60 fps, it will extract 5 x 60 = 300 images. If that's too much, we can instruct FFmpeg to extract frames at a slower frame rate.
      ffmpeg -i input.mp4 -r 10 frame%04d.png
-#The -r 10 argument instructs FFmpeg to extract at a frame rate of 10 fps.
+# The -r 10 argument instructs FFmpeg to extract at a frame rate of 10 fps.
 
-##Extract images every few seconds
-#If you only want to capture frames every few seconds, use the following:
+## Extract images every few seconds
+# If you only want to capture frames every few seconds, use the following:
      ffmpeg -i input.mp4 -r 1/3 frame%04d.png
-#The -r 1/3 argument instructs FFmpeg to extract frames every 3 seconds. To extract every 10 seconds, use -r 1/10.
+# The -r 1/3 argument instructs FFmpeg to extract frames every 3 seconds. To extract every 10 seconds, use -r 1/10.
 
-##Extract at a given time
-#Here's how to get only the images between a given period of time:
+## Extract at a given time
+# Here's how to get only the images between a given period of time:
      ffmpeg -ss 5 -to 8 -i input.mp4 frame%04d.png
-#The -ss 5 -to 8 arguments instruct FFmpeg to only extract frames between 5 and 8 seconds of the video. This argument should be placed before the -i input.mp4 argument, because FFmpeg d
+# The -ss 5 -to 8 arguments instruct FFmpeg to only extract frames between 5 and 8 seconds of the video. This argument should be placed before the -i input.mp4 argument, because FFmpeg d
 istinguishes between input and output seeking. In this case, we're seeking the input video.
 
-##Creating a video screenshot
-#If you only want to extract a single frame from the video, do the following:
+## Creating a video screenshot
+# If you only want to extract a single frame from the video, do the following:
      ffmpeg -ss 5 -i input.mp4 -frames 1 screenshot.png
-#The -ss 5 argument tells FFmpeg to jump to the 5-second mark.
-#Next, it extracts a single image with the -frames 1 argument.
+# The -ss 5 argument tells FFmpeg to jump to the 5-second mark.
+# Next, it extracts a single image with the -frames 1 argument.
 
-#You'll get a screenshot at the same resolution as the input video. If you'd rather resize the image to a smaller size, i.e. make a video thumbnail, we can add an argument:
+# You'll get a screenshot at the same resolution as the input video. If you'd rather resize the image to a smaller size, i.e. make a video thumbnail, we can add an argument:
      ffmpeg -ss 5 -i input.mp4 -frames 1 -vf "scale=360:-1" screenshot.png
-#By adding -vf "scale=360:-1", the image is resized to 360 pixels wide. By using -1, FFmpeg calculates the height automatically, keeping the image proportional.
+# By adding -vf "scale=360:-1", the image is resized to 360 pixels wide. By using -1, FFmpeg calculates the height automatically, keeping the image proportional.
